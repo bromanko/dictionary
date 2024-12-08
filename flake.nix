@@ -31,7 +31,6 @@
             devShells.default = pkgs.mkShell {
               buildInputs = with pkgs; [
                 sqlite
-                prisma
               ];
             };
           };
