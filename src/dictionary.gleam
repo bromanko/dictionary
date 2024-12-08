@@ -11,8 +11,11 @@ pub fn main() -> Nil {
 }
 
 fn get(name: String) -> Nil {
-  let value = envoy.get(name) |> result.unwrap("")
-  io.println(format_pair(name, value))
+  name
+  |> envoy.get
+  |> result.unwrap("")
+  |> format_pair(name)
+  |> io.println
 }
 
 fn format_pair(key: String, value: String) -> String {
