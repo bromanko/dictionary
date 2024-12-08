@@ -29,7 +29,10 @@
           {
             packages = { };
             devShells.default = pkgs.mkShell {
-              buildInputs = with pkgs; [ sqlite3 ];
+              buildInputs = with pkgs; [
+                sqlite
+                prisma
+              ];
             };
           };
       };
