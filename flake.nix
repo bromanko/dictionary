@@ -21,7 +21,7 @@
           "x86_64-linux"
           "aarch64-linux"
         ];
-        per-system =
+        perSystem =
           {
             pkgs,
             ...
