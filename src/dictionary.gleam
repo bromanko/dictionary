@@ -28,15 +28,14 @@ fn server() {
       port: envoy.get("DICTIONARY_PORT") |> option.from_result,
     )
 
-  let assert Ok(priv) = wisp.priv_directory("dictionary")
-  let static_directory = priv <> "/static"
-
   // We don't use any signing in this application so the secret key can be
   // generated anew each time
   let secret_key_base = wisp.random_string(64)
 
   // Initialisation that is run per-request
-  let make_context = fn() { web.Context(static_directory: static_directory) }
+  let make_context = fn() {
+    web.Context(static_directory: server_config.static_directory)
+  }
 
   // Start the web server
   let assert Ok(_) =
