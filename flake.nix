@@ -32,6 +32,8 @@
               buildInputs = with pkgs; [
                 sqlite
                 gleam
+                erlang_27
+                rebar3
               ];
             };
           };
