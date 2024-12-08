@@ -34,6 +34,7 @@
                 gleam
                 erlang_27
                 rebar3
+                watchexec
               ];
             };
           };
