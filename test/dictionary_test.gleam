@@ -1,3 +1,4 @@
+import dictionary/internal
 import gleeunit
 import gleeunit/should
 
@@ -5,8 +6,8 @@ pub fn main() {
   gleeunit.main()
 }
 
-// gleeunit test functions end in `_test`
-pub fn hello_world_test() {
-  1
-  |> should.equal(1)
+pub fn format_pair_test() {
+  let key = "key"
+  let value = "value"
+  internal.format_pair(key, value) |> should.equal("key: value")
 }
