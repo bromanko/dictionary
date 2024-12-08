@@ -31,6 +31,7 @@
             devShells.default = pkgs.mkShell {
               buildInputs = with pkgs; [
                 sqlite
+                gleam
               ];
             };
           };
