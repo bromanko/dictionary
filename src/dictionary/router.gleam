@@ -1,4 +1,5 @@
 import dictionary/web.{type Context}
+import dictionary/web/page
 import gleam/http/request
 import wisp.{type Request, type Response}
 
@@ -10,6 +11,7 @@ pub fn handle_request(
   use request <- middleware(request, context)
 
   case request.path_segments(request) {
+    [] -> home(request, context)
     _ -> wisp.redirect(to: "/")
   }
 }
@@ -26,4 +28,9 @@ pub fn middleware(
   use <- wisp.serve_static(req, under: "/static", from: ctx.static_directory)
 
   handle_request(req)
+}
+
+fn home(_request: Request, _ctx: Context) -> Response {
+  page.home()
+  |> wisp.html_response(200)
 }
