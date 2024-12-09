@@ -1,4 +1,11 @@
 .PHONY: run
 
 run:
-	watchexec --restart --verbose --clear --wrap-process=session --stop-signal SIGTERM --exts gleam --watch src/ -- "gleam run"
+	watchexec \
+    	--restart \
+    	--clear \
+    	--exts gleam \
+    	--watch src/ \
+        --shell zsh \
+        --stop-signal SIGKILL \
+        -- gleam run server
