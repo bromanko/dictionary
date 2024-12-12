@@ -1,4 +1,4 @@
-.PHONY: run migration
+.PHONY: run migration schema
 
 run:
 	watchexec \
@@ -13,3 +13,6 @@ run:
 migration:
 	@read -p "Enter migration description: " description; \
 	gleam run -m feather -- new "$$description"
+
+schema:
+	gleam run -m feather -- schema
