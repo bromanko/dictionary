@@ -1,5 +1,7 @@
 name = "dictionary"
 version = "1.0.0"
+migrations_dir = "./priv/migrations"
+schemafile = "./schema.sql"
 
 [dependencies]
 gleam_stdlib = ">= 0.34.0 and < 2.0.0"
