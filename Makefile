@@ -1,4 +1,4 @@
-.PHONY: run
+.PHONY: run migration
 
 run:
 	watchexec \
@@ -9,3 +9,7 @@ run:
         --shell zsh \
         --stop-signal SIGKILL \
         -- gleam run server
+
+migration:
+	@read -p "Enter migration description: " description; \
+	gleam run -m feather -- new "$$description"
