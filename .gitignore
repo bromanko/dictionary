@@ -2,6 +2,9 @@
 *.ez
 /build
 erl_crash.dump
+priv/*.db
+priv/*.db-shm
+priv/*.db-wal
 # Created by https://www.toptal.com/developers/gitignore/api/direnv
 # Edit at https://www.toptal.com/developers/gitignore?templates=direnv
 
