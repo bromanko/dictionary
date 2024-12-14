@@ -1,4 +1,4 @@
-.PHONY: run migration schema
+.PHONY: run migration schema migrate
 
 run:
 	watchexec \
@@ -16,3 +16,7 @@ migration:
 
 schema:
 	gleam run -m feather -- schema
+
+migrate:
+	@read -p "Enter path to database file: " db_path; \
+	gleam run migrate "$$db_path"

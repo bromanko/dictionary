@@ -2,22 +2,40 @@ import argv
 import dictionary/router
 import dictionary/web
 import envoy
+import feather
+import feather/migrate
+import gleam/erlang
 import gleam/erlang/process
 import gleam/io
 import gleam/option
+import gleam/result
 import mist
 import wisp
 import wisp/wisp_mist
 
 const usage = "Usage:
+  gleam run migrate <db_path>
   gleam run server
 "
 
 pub fn main() -> Nil {
   case argv.load().arguments {
+    ["migrate", db_path] -> migrate(db_path)
     ["server"] -> server()
     _ -> io.println(usage)
   }
+}
+
+fn migrate(db_path: String) -> Nil {
+  io.println("Migrating database... ")
+  let assert Ok(priv_dir) = erlang.priv_directory("dictionary")
+  let assert Ok(migrations) =
+    { priv_dir <> "/migrations" } |> migrate.get_migrations
+  let assert Ok(_) =
+    feather.Config(..feather.default_config(), file: db_path)
+    |> feather.connect
+    |> result.map(fn(conn) { migrate.migrate(migrations, on: conn) })
+  io.println("Done")
 }
 
 fn server() {
