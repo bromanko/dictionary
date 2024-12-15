@@ -6,6 +6,7 @@ packages = [
   { name = "birl", version = "1.7.1", build_tools = ["gleam"], requirements = ["gleam_stdlib", "ranger"], otp_app = "birl", source = "hex", outer_checksum = "5C66647D62BCB11FE327E7A6024907C4A17954EF22865FE0940B54A852446D01" },
   { name = "cake", version = "2.1.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "cake", source = "hex", outer_checksum = "141FEBE63A3BBD2872232BBB61B83E75F9367A4C07DD825286D58AF8D86D7702" },
   { name = "cake_sqlight", version = "1.0.2", build_tools = ["gleam"], requirements = ["cake", "gleam_stdlib", "sqlight"], otp_app = "cake_sqlight", source = "hex", outer_checksum = "354A45A92EF798EFEBB1CDC170A1484F032503326340D8ED322EF4DDE69B6005" },
+  { name = "clip", version = "1.0.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "clip", source = "hex", outer_checksum = "669BEA23D067F89B274A0E869533D2EC7C0DB1B5E650A03439C4558749945E94" },
   { name = "directories", version = "1.1.0", build_tools = ["gleam"], requirements = ["envoy", "gleam_stdlib", "platform", "simplifile"], otp_app = "directories", source = "hex", outer_checksum = "BDA521A4EB9EE3A7894F0DC863797878E91FF5C7826F7084B2E731E208BDB076" },
   { name = "envoy", version = "1.0.2", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "envoy", source = "hex", outer_checksum = "95FD059345AA982E89A0B6E2A3BF1CF43E17A7048DCD85B5B65D3B9E4E39D359" },
   { name = "esqlite", version = "0.8.8", build_tools = ["rebar3"], requirements = [], otp_app = "esqlite", source = "hex", outer_checksum = "374902457C7D94DC9409C98D3BDD1CA0D50A60DC9F3BDF1FD8EB74C0DCDF02D6" },
@@ -41,6 +42,7 @@ packages = [
 argv = { version = ">= 1.0.2 and < 2.0.0" }
 cake = { version = ">= 2.1.0 and < 3.0.0" }
 cake_sqlight = { version = ">= 1.0.2 and < 2.0.0" }
+clip = { version = ">= 1.0.0 and < 2.0.0" }
 envoy = { version = ">= 1.0.2 and < 2.0.0" }
 feather = { version = ">= 1.2.0 and < 2.0.0" }
 gleam_erlang = { version = ">= 0.33.0 and < 1.0.0" }
