@@ -1,12 +1,9 @@
 import clip
-import clip/flag
 import clip/help
-import clip/opt
 import dictionary/router
 import dictionary/web
 import envoy
 import gleam/erlang/process
-import gleam/io
 import gleam/option
 import mist
 import wisp
