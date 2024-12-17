@@ -30,6 +30,7 @@
             packages = { };
             devShells.default = pkgs.mkShell {
               DICTIONARY_DB_PATH = "./priv/dictionary.db";
+              DICTIONARY_LOG_QUERIES = "true";
 
               buildInputs = with pkgs; [
                 sqlite
