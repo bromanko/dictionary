@@ -5,6 +5,7 @@ import dictionary/router
 import dictionary/web
 import envoy
 import gleam/erlang/process
+import gleam/io
 import gleam/option
 import mist
 import wisp
@@ -15,6 +16,7 @@ fn parse_config() -> Result(config.Config, config.ConfigError) {
     port: envoy.get("DICTIONARY_PORT") |> option.from_result,
     db_path: envoy.get("DICTIONARY_DB_PATH") |> option.from_result,
   )
+  |> io.debug
 }
 
 pub fn command() -> clip.Command(Nil) {
