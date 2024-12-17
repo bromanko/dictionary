@@ -1,5 +1,6 @@
 import clip
 import clip/help
+import dictionary/config
 import dictionary/router
 import dictionary/web
 import envoy
@@ -9,6 +10,10 @@ import mist
 import wisp
 import wisp/wisp_mist
 
+fn parse_config() -> Result(config.Config, config.ConfigError) {
+  config.parse_config(port: envoy.get("DICTIONARY_PORT") |> option.from_result)
+}
+
 pub fn command() -> clip.Command(Nil) {
   // This is a workaround for the fact that clip.command wants to have
   // an option or flag provided to it.
@@ -17,10 +22,7 @@ pub fn command() -> clip.Command(Nil) {
     clip.command(fn(_) {
       wisp.configure_logger()
 
-      let assert Ok(server_config) =
-        web.parse_server_config(
-          port: envoy.get("DICTIONARY_PORT") |> option.from_result,
-        )
+      let assert Ok(config) = parse_config()
 
       // We don't use any signing in this application so the secret key can be
       // generated anew each time
@@ -28,7 +30,7 @@ pub fn command() -> clip.Command(Nil) {
 
       // Initialisation that is run per-request
       let make_context = fn() {
-        web.Context(static_directory: server_config.static_directory)
+        web.Context(static_directory: config.server.static_directory)
       }
 
       // Start the web server
@@ -36,7 +38,7 @@ pub fn command() -> clip.Command(Nil) {
         router.handle_request(_, make_context)
         |> wisp_mist.handler(secret_key_base)
         |> mist.new
-        |> mist.port(server_config.port)
+        |> mist.port(config.server.port)
         |> mist.start_http
 
       // Put the main process to sleep while the web server handles traffic
