@@ -11,7 +11,10 @@ import wisp
 import wisp/wisp_mist
 
 fn parse_config() -> Result(config.Config, config.ConfigError) {
-  config.parse_config(port: envoy.get("DICTIONARY_PORT") |> option.from_result)
+  config.parse_config(
+    port: envoy.get("DICTIONARY_PORT") |> option.from_result,
+    db_path: envoy.get("DICTIONARY_DB_PATH") |> option.from_result,
+  )
 }
 
 pub fn command() -> clip.Command(Nil) {
