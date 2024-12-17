@@ -19,7 +19,7 @@ fn get_words_query() {
   |> s.join(j.inner(
     with: j.table("definitions"),
     on: w.col("words.id") |> w.eq(w.col("definitions.word_id")),
-    alias: "Get all words",
+    alias: "definitions",
   ))
   |> s.order_by_asc("words.word")
   |> s.to_query()

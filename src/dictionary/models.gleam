@@ -7,7 +7,7 @@ pub type Word {
 pub fn decode_word() -> fn(Dynamic) -> Result(Word, List(dynamic.DecodeError)) {
   dynamic.decode2(
     Word,
-    dynamic.field("id", dynamic.int),
-    dynamic.field("word", dynamic.string),
+    dynamic.element(0, dynamic.int),
+    dynamic.element(1, dynamic.string),
   )
 }
