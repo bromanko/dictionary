@@ -25,7 +25,11 @@ pub fn middleware(
   use <- wisp.log_request(req)
   use <- wisp.rescue_crashes
   use req <- wisp.handle_head(req)
-  use <- wisp.serve_static(req, under: "/static", from: ctx.static_directory)
+  use <- wisp.serve_static(
+    req,
+    under: "/static",
+    from: ctx.cfg.server.static_directory,
+  )
 
   handle_request(req)
 }

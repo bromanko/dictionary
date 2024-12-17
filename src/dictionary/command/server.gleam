@@ -34,9 +34,7 @@ pub fn command() -> clip.Command(Nil) {
       let secret_key_base = wisp.random_string(64)
 
       // Initialisation that is run per-request
-      let make_context = fn() {
-        web.Context(static_directory: config.server.static_directory)
-      }
+      let make_context = fn() { web.Context(cfg: config) }
 
       // Start the web server
       let assert Ok(_) =

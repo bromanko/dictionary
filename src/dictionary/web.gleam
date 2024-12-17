@@ -1,3 +1,5 @@
+import dictionary/config.{type Config}
+
 pub type Context {
-  Context(static_directory: String)
+  Context(cfg: Config)
 }
