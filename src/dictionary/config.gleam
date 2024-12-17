@@ -12,12 +12,13 @@ pub type ServerConfig {
 }
 
 pub type DatabaseConfig {
-  DatabaseConfig(path: String)
+  DatabaseConfig(path: String, log_queries: Bool)
 }
 
 pub type ConfigError {
   PortParseError
   DbPathParseError
+  LogQueriesParseError
 }
 
 fn make_static_directory() -> String {
@@ -40,16 +41,27 @@ fn parse_db_path(db_path: Option(String)) -> Result(String, ConfigError) {
   }
 }
 
+fn parse_log_queries(log_queries: Option(String)) -> Result(Bool, ConfigError) {
+  case log_queries {
+    None -> Ok(False)
+    Some("true") -> Ok(True)
+    Some("false") -> Ok(False)
+    Some(_) -> Error(LogQueriesParseError)
+  }
+}
+
 pub fn parse_config(
   port port: Option(String),
   db_path db_path: Option(String),
+  log_queries log_queries: Option(String),
 ) -> Result(Config, ConfigError) {
   use port <- result.try(parse_port(port))
   use db_path <- result.try(parse_db_path(db_path))
+  use log_queries <- result.try(parse_log_queries(log_queries))
 
   Config(
     server: ServerConfig(port: port, static_directory: make_static_directory()),
-    database: DatabaseConfig(path: db_path),
+    database: DatabaseConfig(path: db_path, log_queries: log_queries),
   )
   |> Ok
 }

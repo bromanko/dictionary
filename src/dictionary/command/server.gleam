@@ -15,6 +15,7 @@ fn parse_config() -> Result(config.Config, config.ConfigError) {
   config.parse_config(
     port: envoy.get("DICTIONARY_PORT") |> option.from_result,
     db_path: envoy.get("DICTIONARY_DB_PATH") |> option.from_result,
+    log_queries: envoy.get("DICTIONARY_LOG_QUERIES") |> option.from_result,
   )
   |> io.debug
 }
