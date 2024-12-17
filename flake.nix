@@ -29,6 +29,8 @@
           {
             packages = { };
             devShells.default = pkgs.mkShell {
+              DICTIONARY_DB_PATH = "./priv/dictionary.db";
+
               buildInputs = with pkgs; [
                 sqlite
                 gleam
