@@ -1,6 +1,8 @@
+import dictionary/error
 import dictionary/web.{type Context}
 import dictionary/web/page
 import gleam/http/request
+import gleam/result
 import wisp.{type Request, type Response}
 
 pub fn handle_request(
@@ -34,7 +36,9 @@ pub fn middleware(
   handle_request(req)
 }
 
-fn home(_request: Request, _ctx: Context) -> Response {
-  page.home()
-  |> wisp.html_response(200)
+fn home(_request: Request, ctx: Context) -> Response {
+  page.home(ctx)
+  |> result.map(wisp.html_response(_, 200))
+  |> result.map_error(error.debug_log)
+  |> result.unwrap(wisp.internal_server_error())
 }
