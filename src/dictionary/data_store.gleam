@@ -33,14 +33,6 @@ pub fn get_conn(config: DatabaseConfig, callback: fn(Connection) -> a) -> a {
   callback(Connection(conn, log_query))
 }
 
-fn log_query(query) {
-  query
-  |> sqlite.read_query_to_prepared_statement
-  |> cake.get_sql
-  |> io.debug
-  query
-}
-
 fn cake_param_to_client_param(param param: Param) -> sqlight.Value {
   case param {
     BoolParam(param) -> sqlight.bool(param)
@@ -88,7 +80,6 @@ fn get_words_query() {
 
 pub fn get_words(conn: Connection) -> Result(List(models.Word), error.Error) {
   get_words_query()
-  |> log_query
   |> run_read_query(models.decode_word(), conn)
   |> result.map_error(error.DataStoreError)
 }
