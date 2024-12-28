@@ -6,7 +6,6 @@ import dictionary/web/input
 import dictionary/web/layout
 import gleam/dict
 import gleam/list
-import gleam/order
 import gleam/result
 import gleam/string
 import gleam/string_tree.{type StringTree}
