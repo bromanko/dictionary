@@ -2,7 +2,7 @@ import gleam/string_tree.{type StringTree}
 import lustre/attribute.{attribute, class}
 import lustre/element.{type Element, text}
 import lustre/element/html.{
-  body, h1, head, header, html, main, meta, script, title,
+  body, h1, head, header, html, link, main, meta, title,
 }
 
 pub fn default(content: Element(Nil)) -> StringTree {
@@ -14,7 +14,7 @@ pub fn default(content: Element(Nil)) -> StringTree {
         attribute("content", "width=device-width, initial-scale=1"),
       ]),
       title([], "bromanko's dictionary"),
-      script([attribute.src("https://cdn.tailwindcss.com")], ""),
+      link([attribute.rel("stylesheet"), attribute.href("/static/app.css")]),
     ]),
     body([class("bg-gray-100 font-sans")], [
       header([class("bg-white shadow p-4")], [

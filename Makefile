@@ -3,8 +3,15 @@ help:
 	@echo "Usage: make [target]"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+
+SRC_CSS = src/css/app.css
+DEST_CSS = priv/static/app.css
+
+.PHONY: clean
+	@rm -f $(DEST_CSS)
+
 .PHONY: run
-run: ## Run the server
+run: css ## Run the server
 	watchexec \
     	--restart \
     	--clear \
@@ -13,6 +20,11 @@ run: ## Run the server
         --shell zsh \
         --stop-signal SIGKILL \
         -- gleam run server
+
+css: $(DEST_CSS) ## Generate CSS
+
+$(DEST_CSS): $(SRC_CSS) $(wildcard src/dictionary/web/*.gleam)
+	gleam run -m tailwind/run
 
 .PHONY: migration
 migration: ## Create a new migration
